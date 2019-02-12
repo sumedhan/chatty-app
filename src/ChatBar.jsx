@@ -2,25 +2,47 @@ import React, {Component} from 'react';
 
 
 class ChatBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {messageContent:'', username: this.props.currentUser.name}
+  }
+  changeMessageValue(messageContent){
+    this.setState({messageContent});
+  }
+  changeUserValue(username) {
+    this.setState({username});
+  }
   render() {
-    const handleKeyPress = (event) => {
-      if(event.key === 'Enter' && event.target.name === "content"){
-        const messageContent = event.currentTarget.elements.content.value;
-        const username = event.currentTarget.elements.username.value;
+    const keyPressHandler = (event) => {
+      if(event.key === 'Enter'){
+        const messageContent = this.state.messageContent;
+        const username = this.state.username;
         this.props.addMessage(messageContent, username);
-        event.target.value='';
+        this.changeMessageValue('');
       }
     }
+    const onChangeMessageHandler = (event) => {
+      this.changeMessageValue(event.target.value);
+    }
+    const onChangeUserHandler = (event) => {
+      this.changeUserValue(event.target.value);
+    }
     return (
-      <footer>
-      <form className="chatbar" onKeyPress={handleKeyPress}>
-        <input className="chatbar-username" placeholder={this.props.currentUser.name} name="username"/>
+      <footer className="chatbar">
+        <input 
+          className="chatbar-username" 
+          value={this.state.username}
+          name="username"
+          onChange= {onChangeUserHandler}
+        />
         <input 
           className="chatbar-message" 
           placeholder="Type a message and hit ENTER" 
           name="content"
+          value = {this.state.messageContent}
+          onChange = {onChangeMessageHandler}
+          onKeyPress = {keyPressHandler}
           />
-      </form>
       </footer>
     );
   }
