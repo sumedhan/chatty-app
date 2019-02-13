@@ -1,11 +1,8 @@
+
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
-
-
-function randomId() {
-  return Math.random().toString(36).substr(2,6);
-}
+import { stringify } from 'querystring';
 
 
 const Navbar = () => {
@@ -22,21 +19,11 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          id: 1,
-          username: 'Bob',
-          content: 'Has anyone seen my marbles?',
-        },
-        {
-          id: 2,
-          username: 'Anonymous',
-          content: 'No, I think you lost them. You lost your marbles Bob. You lost them for good.'
-        }
-      ]
+      messages: [] // stores messages coming from the server
     }
     this.addMessage = this.addMessage.bind(this);
     this.changeCurrentUser = this.changeCurrentUser.bind(this);
+    
   }
 
   componentDidMount() {
@@ -53,23 +40,23 @@ class App extends Component {
 
     // Connecting to WebSocket Server
     const socket = new WebSocket('ws://localhost:3001');
+    this.socket = socket;
     socket.onopen = () => {
-      console.log("Now connected to WebSocket server. Let the chattiness begin.");
-      socket.send("I feel chatty");
+      console.log('Now connected to WebSocket server. Let the chattyness begin.');
     }
 
-
+    //listening to socket
+    socket.onmessage = (message) => {
+      // When the server sends a message, the state of the app updates with the new message
+      this.setState({messages:[...this.state.messages, JSON.parse(message.data)]})
+      console.log("New message received.");
+    }
   }
 
   addMessage (content, username) {
-    const newMessage = {
-      id: randomId(),
-      username,
-      content
-    }
-    const messages = [...this.state.messages, newMessage];
-    this.setState({messages});
+    this.socket.send(JSON.stringify({username, content}));
   }
+
 
   changeCurrentUser (name) {
     const currentUser = {
