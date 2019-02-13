@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {messageContent:'', username: this.props.currentUser.name}
+    this.state = {messageContent:'', username: this.props.currentUsername}
   }
   changeMessageValue(messageContent){
     this.setState({messageContent});
@@ -13,12 +13,18 @@ class ChatBar extends Component {
     this.setState({username});
   }
   render() {
-    const keyPressHandler = (event) => {
+    const keyPressMessageHandler = (event) => {
       if(event.key === 'Enter'){
         const messageContent = this.state.messageContent;
-        const username = this.state.username;
+        const username = this.props.currentUsername;
         this.props.addMessage(messageContent, username);
         this.changeMessageValue('');
+      }
+    }
+    const keyPressUserHandler = (event) => {
+      if(event.key === 'Enter'){
+        const username = this.state.username;
+        this.props.changeCurrentUser(username);
       }
     }
     const onChangeMessageHandler = (event) => {
@@ -34,6 +40,7 @@ class ChatBar extends Component {
           value={this.state.username}
           name="username"
           onChange= {onChangeUserHandler}
+          onKeyPress={keyPressUserHandler}
         />
         <input 
           className="chatbar-message" 
@@ -41,7 +48,7 @@ class ChatBar extends Component {
           name="content"
           value = {this.state.messageContent}
           onChange = {onChangeMessageHandler}
-          onKeyPress = {keyPressHandler}
+          onKeyPress = {keyPressMessageHandler}
           />
       </footer>
     );
