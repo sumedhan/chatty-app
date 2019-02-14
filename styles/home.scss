@@ -75,10 +75,17 @@ body {
   top: 0;
 }
 
+.navbar-info {
+  float: right;
+  color: inherit;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
 .navbar-brand {
+  float: left;
   color: inherit;
   display: block;
-  float: left;
   font-weight: 700;
   font-size: 28px;
   height: 60px;
@@ -86,3 +93,6 @@ body {
   padding: 0 10px;
   text-decoration: none;
 }
+
+
+

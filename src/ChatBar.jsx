@@ -17,7 +17,8 @@ class ChatBar extends Component {
       if(event.key === 'Enter'){
         const messageContent = this.state.messageContent;
         const username = this.props.currentUsername;
-        this.props.addMessage(messageContent, username);
+        const userColor = this.props.userColor;
+        this.props.addMessage(messageContent, username, userColor);
         this.changeMessageValue('');
       }
     }
@@ -49,7 +50,9 @@ class ChatBar extends Component {
           value = {this.state.messageContent}
           onChange = {onChangeMessageHandler}
           onKeyPress = {keyPressMessageHandler}
-          />
+        />
+        <p>{this.props.currentUsername}</p>
+
       </footer>
     );
   }

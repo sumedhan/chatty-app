@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 
 class IncomingMessage extends Component {
   render() {
+    const style = {
+      color: this.props.userColor
+    }
     return (
       <div className="message">
-        <span className="message-username">{this.props.username}</span>
+        <span className="message-username" style={style}>{this.props.username}</span>
           <span className="message-content">{this.props.content}</span>
       </div>
     );
@@ -28,6 +31,7 @@ class Message extends Component {
       (<IncomingMessage 
       content={message.content}
       username={message.username}
+      userColor={message.userColor}
       />) :
       (<IncomingNotification
       content={message.content}

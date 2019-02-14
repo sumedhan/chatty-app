@@ -8,6 +8,7 @@ class MessageList extends Component {
       return (
         <Message 
           messageDetails = {msg}
+          key = {msg.id}
         />
       )
     })
