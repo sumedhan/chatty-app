@@ -24,7 +24,10 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', (message) => {
-    ws.send(msgWithId(JSON.parse(message)));
+    const jsonMsg = msgWithId(JSON.parse(message));
+    wss.clients.forEach(client => {
+        client.send(jsonMsg);
+    })
   })
   
 

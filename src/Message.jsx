@@ -10,20 +10,28 @@ class IncomingMessage extends Component {
     );
     }
 }
-// const IncomingNotification = () => {
-//   return (
-//     <div className="message system">
-//       Anonymous1 changed their name to nomnom.
-//     </div>
-//   )
-// }
-class Message extends Component {
+class IncomingNotification extends Component {
   render() {
     return (
-      <IncomingMessage 
-      content={this.props.content}
-      username={this.props.username}
-      />
+      <div className="message system">
+        {this.props.content}
+      </div>
+    )
+  }
+}
+class Message extends Component {
+  render() {
+    let message = this.props.messageDetails;
+    console.log(message);
+    return (
+      (message.type === 'incomingMessage') ?
+      (<IncomingMessage 
+      content={message.content}
+      username={message.username}
+      />) :
+      (<IncomingNotification
+      content={message.content}
+      />)
     )
   }
 }
