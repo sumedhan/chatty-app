@@ -9,9 +9,11 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 2. Receive notifications when any user changes their name
 3. Receive real time messages instantly
 4. All users assigned a color to help distinguish different messages
+5. If a user types in a message that contains an image url (ex. any url that ends with jpg, png, gif), the image is displayed with the message
 
 ### App Screenshot
 ![screenshot2](./screenshots/screenshot2.png)
+![screenshot3](./screenshots/screenshot3.png)
 
 ### Project Stack
 
