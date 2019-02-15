@@ -23,6 +23,7 @@ class App extends Component {
   componentDidMount() {
     console.log('componentDidMount <App />');
     console.log(`current user is ${this.state.currentUser.name}`);
+    this.inputRef.current.focus();
 
     // Connecting to WebSocket Server
     const socket = new WebSocket('ws://localhost:3001');
@@ -84,9 +85,10 @@ class App extends Component {
         <Navbar onlineUsers={this.state.onlineUsers}/>
         <MessageList messages={this.state.messages}/>
         <ChatBar currentUsername={this.state.currentUser.name} 
-        addMessage={this.addMessage} 
-        changeCurrentUser={this.changeCurrentUser} 
-        userColor={this.state.currentUser.color}/>
+          addMessage={this.addMessage} 
+          changeCurrentUser={this.changeCurrentUser} 
+          userColor={this.state.currentUser.color}
+        />
       </div> 
     )
   }

@@ -14,7 +14,7 @@ function numberOfUsersMsg(connectedClients) {
 }
 
 function assignUserColor() {
-  const colors = ['#5B85AA', '#E3B505', '#72BDA3', '#BD1E1E'];
+  const colors = ['#5B85AA', '#E3B505', '#72BDA3', '#BD1E1E','#00BFB2','#C64191', '#3C1518'];
   let randomIndex = Math.floor(Math.random()*colors.length);
   const message = {
     type: 'userColor',
@@ -23,6 +23,7 @@ function assignUserColor() {
   return JSON.stringify(message);
 
 }
+
 
 module.exports = {
   msgWithId,

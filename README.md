@@ -10,8 +10,7 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 3. Receive real time messages instantly
 4. All users assigned a color to help distinguish different messages
 
-### Screenshots
-![screenshot1](./screenshots/screenshot1.png)
+### App Screenshot
 ![screenshot2](./screenshots/screenshot2.png)
 
 ### Project Stack

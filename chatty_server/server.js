@@ -37,6 +37,7 @@ wss.on('connection', (ws) => {
     console.log('Client disconnected');
     // broadcasts change in users once the client closes connection
     wss.broadcast(numberOfUsersMsg(wss.clients.size));
+    
   })
 });
 
