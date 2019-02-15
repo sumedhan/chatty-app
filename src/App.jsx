@@ -23,7 +23,6 @@ class App extends Component {
   componentDidMount() {
     console.log('componentDidMount <App />');
     console.log(`current user is ${this.state.currentUser.name}`);
-    this.inputRef.current.focus();
 
     // Connecting to WebSocket Server
     const socket = new WebSocket('ws://localhost:3001');
