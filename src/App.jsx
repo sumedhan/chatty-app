@@ -18,13 +18,12 @@ class App extends Component {
     }
     this.addMessage = this.addMessage.bind(this);
     this.changeCurrentUser = this.changeCurrentUser.bind(this);
-    
   }
 
   componentDidMount() {
     console.log('componentDidMount <App />');
     console.log(`current user is ${this.state.currentUser.name}`);
-  
+
     // Connecting to WebSocket Server
     const socket = new WebSocket('ws://localhost:3001');
     this.socket = socket;
@@ -34,8 +33,9 @@ class App extends Component {
      //listening to socket
     socket.onmessage = (message) => {
       const parsedMsg = JSON.parse(message.data);
-      console.log(`New ${parsedMsg.type} received.`);
-      // When the server sends a message, the state of the app updates with the new message
+      console.log(`New message with type: ${parsedMsg.type} received.`);
+
+      // When the server sends a message - the following switch handles it on client side and makes 
       switch (parsedMsg.type) {
         case 'incomingNotification':
         case 'incomingMessage': 
@@ -50,15 +50,13 @@ class App extends Component {
           this.setState({currentUser});
           break;
         default:
-          console.log("error");
+          console.log("Error. The message type cannot be handled");
           break;
-
       }
     }
   }
 
-  
-
+  // Method called when a user sends a message, sends it to the server
   addMessage (content, username, userColor) {
     this.socket.send(JSON.stringify({
       type: 'incomingMessage', 
@@ -68,6 +66,7 @@ class App extends Component {
     }));
   }
 
+  //  Method to change current user's name in state and send a notification to the server to send a notification to all users
   changeCurrentUser (name) {
     const oldName = this.state.currentUser.name;
     let currentUser = this.state.currentUser;
@@ -79,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("in app",this.state);
+    //App component displaying three different components
     return (
       <div>
         <Navbar onlineUsers={this.state.onlineUsers}/>

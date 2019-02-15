@@ -20,21 +20,27 @@ const wss = new WebSocket.Server({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  // assigns user color
   ws.send(assignUserColor());
+
+  // broadcasts change in number of users
   wss.broadcast(numberOfUsersMsg(wss.clients.size));
+
+  // receives a message, adds an id and broadcasts it to all users
   ws.on('message', (message) => {
     const jsonMsg = msgWithId(JSON.parse(message));
     wss.broadcast(jsonMsg);
   })
   
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
+  // Set up a callback for when a client closes the socket
   ws.on('close', () => {
     console.log('Client disconnected');
+    // broadcasts change in users once the client closes connection
     wss.broadcast(numberOfUsersMsg(wss.clients.size));
   })
 });
 
-// Broadcast to all.
+// Broadcast to all
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {

@@ -51,8 +51,6 @@ class ChatBar extends Component {
           onChange = {onChangeMessageHandler}
           onKeyPress = {keyPressMessageHandler}
         />
-        <p>{this.props.currentUsername}</p>
-
       </footer>
     );
   }
