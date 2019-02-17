@@ -10,10 +10,13 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 3. Receive real time messages instantly
 4. All users assigned a color to help distinguish different messages
 5. If a user types in a message that contains an image url (ex. any url that ends with jpg, png, gif), the image is displayed with the message
+6. Giphy integration - to share a gif from Giphy, a user can type /giphy searchterm. The first hit from the giphy search will be displayed.
 
 ### App Screenshot
 ![screenshot2](./screenshots/screenshot2.png)
 ![screenshot3](./screenshots/screenshot3.png)
+![screenshot4](./screenshots/screenshot4.png)
+![screentshot5](./screenshots/screentshot5.png)
 
 ### Project Stack
 
@@ -25,7 +28,8 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 ### Getting started
 1. Install server side dependencies  in ./chatty_server 
 2. Install dependencies on client side in ./ folder
-3. Start both servers, the app loads on `http://localhost:3000`
+3. Configure the .env file as described in the .env.example. An API Key from Giphy is required. 
+4. Start both servers, the app loads on `http://localhost:3000`
 
 
 ### Dependencies
@@ -37,6 +41,8 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 * ws
 * express
 * uuid
+* dotenv
+* Giphy API SDK wrapper
 
 ### Author
 Sumedha Narayanan
