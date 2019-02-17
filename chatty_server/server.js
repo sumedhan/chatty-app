@@ -28,8 +28,17 @@ wss.on('connection', (ws) => {
 
   // receives a message, adds an id and broadcasts it to all users
   ws.on('message', (message) => {
-    const jsonMsg = msgWithId(JSON.parse(message));
-    wss.broadcast(jsonMsg);
+    msgWithId(JSON.parse(message))
+    .then( (jsonMsg) => {
+      wss.broadcast(jsonMsg);
+    })
+    .catch( (err) => {
+      console.error(err);
+      ws.send(JSON.stringify({
+        type: 'incomingNotification',
+        content: 'Gif failed to load. Please try again'
+      }));
+    });
   })
   
   // Set up a callback for when a client closes the socket

@@ -1,8 +1,30 @@
 const uuidv1 = require('uuid/v1');
+var GphApiClient = require('giphy-js-sdk-core');
+client = GphApiClient("bBJLLvHgb38L7eLB258AicSzWKc3VcTn");
 
 function msgWithId(message) {
-  message['id'] = uuidv1();
-  return JSON.stringify(message);
+  return new Promise(function (resolve, reject) {
+    message['id'] = uuidv1();
+    let sync = true;
+    // checks if the message contains a Giphy command
+    if(message.type === 'incomingMessage') {
+      if(message.content.startsWith('/giphy')) {
+        sync = false;
+        let [cmd, search] = message.content.split(' ');
+        client.search('gifs', {rating: 'g', q:search, limit: 1})
+        .then((response) => {
+          message.content = response.data[0].images.original.url;
+          resolve(JSON.stringify(message))
+        })
+        .catch((err) => {
+          reject(err);
+        })
+      }
+    }
+    if(sync) {
+      resolve(JSON.stringify(message));
+    }
+  })
 }
 
 function numberOfUsersMsg(connectedClients) {
