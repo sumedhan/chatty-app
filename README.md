@@ -16,7 +16,7 @@ A SPA, ChattyApp enables multiple users to chat with each other and receive real
 ![screenshot2](./screenshots/screenshot2.png)
 ![screenshot3](./screenshots/screenshot3.png)
 ![screenshot4](./screenshots/screenshot4.png)
-![screentshot5](./screenshots/screentshot5.png)
+![screenshot5](./screenshots/screenshot5.png)
 
 ### Project Stack
 
