@@ -1,7 +1,7 @@
 // server.js
 const express = require('express');
 const WebSocket = require('ws');
-const { msgWithId, numberOfUsersMsg, assignUserColor} = require('./helper_functions');
+const { msgHandling, numberOfUsersMsg, assignUserColor} = require('./helper_functions');
 
 // Set the port to 3001
 const PORT = 3001;
@@ -28,7 +28,7 @@ wss.on('connection', (ws) => {
 
   // receives a message, adds an id and broadcasts it to all users
   ws.on('message', (message) => {
-    msgWithId(JSON.parse(message))
+    msgHandling(JSON.parse(message))
     .then( (jsonMsg) => {
       wss.broadcast(jsonMsg);
     })

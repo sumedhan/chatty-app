@@ -1,13 +1,18 @@
-const uuidv1 = require('uuid/v1');
-var GphApiClient = require('giphy-js-sdk-core');
-client = GphApiClient("bBJLLvHgb38L7eLB258AicSzWKc3VcTn");
+require('dotenv').config()
 
-function msgWithId(message) {
-  return new Promise(function (resolve, reject) {
+const uuidv1 = require('uuid/v1');
+const GphApiClient = require('giphy-js-sdk-core');
+const client = GphApiClient(process.env.GIPHY_APIKEY);
+
+
+
+function msgHandling(message) {
+  return new Promise (function (resolve, reject) {
     message['id'] = uuidv1();
     let sync = true;
-    // checks if the message contains a Giphy command
+    
     if(message.type === 'incomingMessage') {
+      // checks if the message contains a Giphy command
       if(message.content.startsWith('/giphy')) {
         sync = false;
         let [cmd, search] = message.content.split(' ');
@@ -48,7 +53,7 @@ function assignUserColor() {
 
 
 module.exports = {
-  msgWithId,
+  msgHandling,
   numberOfUsersMsg,
   assignUserColor
 }
