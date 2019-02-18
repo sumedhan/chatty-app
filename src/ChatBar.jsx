@@ -14,6 +14,7 @@ class ChatBar extends Component {
   }
   render() {
     const keyPressMessageHandler = (event) => {
+      //  handler for enter keypress in message, it calls the add message function
       if(event.key === 'Enter'){
         const messageContent = this.state.messageContent;
         const username = this.props.currentUsername;
@@ -22,15 +23,18 @@ class ChatBar extends Component {
         this.changeMessageValue('');
       }
     }
+    //  Handle for enter keypress in username field and changes current username
     const keyPressUserHandler = (event) => {
       if(event.key === 'Enter'){
         const username = this.state.username;
         this.props.changeCurrentUser(username);
       }
     }
+    //  handles any change in chatbar message
     const onChangeMessageHandler = (event) => {
       this.changeMessageValue(event.target.value);
     }
+    //  handles change in username
     const onChangeUserHandler = (event) => {
       this.changeUserValue(event.target.value);
     }

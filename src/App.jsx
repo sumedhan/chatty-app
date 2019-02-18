@@ -3,18 +3,13 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Navbar from './Navbar.jsx';
-import { stringify } from 'querystring';
-
-
-
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: 'Anonymous'}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [], // stores messages coming from the server
+      currentUser: {name: 'Anonymous'}, 
+      messages: [], 
     }
     this.addMessage = this.addMessage.bind(this);
     this.changeCurrentUser = this.changeCurrentUser.bind(this);

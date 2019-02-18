@@ -10,7 +10,6 @@ function msgHandling(message) {
   return new Promise (function (resolve, reject) {
     message['id'] = uuidv1();
     let sync = true;
-    
     if(message.type === 'incomingMessage') {
       // checks if the message contains a Giphy command
       if(message.content.startsWith('/giphy')) {
